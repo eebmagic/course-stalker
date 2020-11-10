@@ -30,3 +30,5 @@ elif 'term' not in config:
 elif 'courses' not in config:
     print('You need the courses')
     exit(1)
+elif 'target' not in config:
+    config['target'] = config['email']

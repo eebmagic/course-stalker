@@ -4,6 +4,7 @@ from email.mime.text import MIMEText
 
 # Load email and password
 email = config['email']
+target = config['target']
 password = config['password']
 
 
@@ -23,7 +24,7 @@ def send_email(body=None):
         # Send email
         msg = MIMEText(msg, "plain")
         print(f"sending email with {msg.as_string() = }")
-        server.sendmail(email, email, msg.as_string())
+        server.sendmail(email, target, msg.as_string())
         server.close()
 
         # print ('Email sent!')
