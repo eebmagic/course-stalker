@@ -1,5 +1,5 @@
 import smtplib
-from config import config
+from main import config
 from email.mime.text import MIMEText
 
 # Load email and password
