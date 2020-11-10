@@ -1,5 +1,6 @@
 from config import config
 from bs4 import BeautifulSoup
+import lxml
 import requests
 
 url = 'https://oscar.gatech.edu/pls/bprod/bwckschd.p_disp_detail_sched'
@@ -10,7 +11,7 @@ def _get_page(params):
     if req.status_code != 200:
         print('Something went wrong getting the page')
 
-    return BeautifulSoup(req.content, 'html5lib')
+    return BeautifulSoup(req.content, 'lxml')
 
 def get_seat_counts(course):
     soup = _get_page({
