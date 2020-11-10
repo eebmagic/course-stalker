@@ -3,9 +3,12 @@ import course_handler
 from datetime import datetime
 from models.course import Course
 import notifier
+import notify
 import time
 
 number = config['number']
+
+notify.send_email("Tracker has started using this number")
 
 def main():
     notified = False
@@ -18,7 +21,7 @@ def main():
     for course in watched_courses:
         course.seats = course_handler.get_seat_counts(course)
         print(f'[{datetime.now().strftime("%X")}] {course} is now being tracked!')
-        notifier.send_sms(number, f'{course} is now being tracked!')
+        notify.send_email(f'{course} is now being tracked!')
 
     while True:
         for course in watched_courses:
@@ -28,7 +31,7 @@ def main():
             if new_seats == (-1, -1, -1, -1, -1, -1):
                 print(f'[{datetime.now().strftime("%X")}] Error checking course')
                 if (not notified):
-                    notifier.send_sms(number, f'ERROR CHECKING {course}!')
+                    notify.send_email(f'ERROR CHECKING {course}!')
                     notified = True
                 continue
             notified = False
@@ -39,9 +42,9 @@ def main():
                 course.seats = new_seats
 
                 if int(new_seats[3]) > 0:
-                    notifier.send_sms(number, f'{course} now has a waitlist seat!')
+                    notify.send_email(f'{course} now has a waitlist seat!')
                 if int(new_seats[0]) > 0:
-                    notifier.send_sms(number, f'{course} now has seats!')
+                    notify.send_email(f'{course} now has seats!')
                 
 
         time.sleep(3)
@@ -53,5 +56,5 @@ if __name__ == '__main__':
         print('\nQuitting from keyboard stop')
         quit()
     except:
-        notifier.send_sms(number, 'PROGRAM CRASHED!')
+        notify.send_email('PROGRAM CRASHED!')
         main()
