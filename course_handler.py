@@ -3,6 +3,7 @@ import lxml
 import requests
 
 from main import config
+
 url = 'https://oscar.gatech.edu/pls/bprod/bwckschd.p_disp_detail_sched'
 
 def _get_page(params):
