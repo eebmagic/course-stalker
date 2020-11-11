@@ -1,4 +1,4 @@
-import configurer
+import config
 import sys
 
 file = "config.yml"
@@ -6,7 +6,7 @@ for arg in sys.argv:
     if arg.endswith(".yml"):
         file = arg
 
-config = configurer.get_info(file)
+config = config.get_info(file)
 
 import course_handler
 from datetime import datetime
